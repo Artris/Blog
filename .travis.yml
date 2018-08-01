@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "lts/*"
+script:
+  - npm install -g vuepress
+
+before_deploy:
+  - vuepress build $TRAVIS_BUILD_DIR/docs/
+
+deploy:
+  provider: firebase
+  skip_cleanup: true
+  on:
+    branch: master
+  token:
+    secure: $FIREBASE_TOKEN
+# travis env encryption
+env:
+  global:
+  - secure: OVp4ZvnbvGPVIGCtAg05pAASbojmg7HcyuzugQP9DWeJmXWk4MGx9/8EVTmfnPSHTEUUQkV/AnQcGSvkXvEkyEAEifUWlK+EwVHMMLVkvbPuyreM55cEQa2zh80fkBaXsNEY4pDO7wNElqb47pcaKEEHujjGTn4RuiD5WlSajXqC32o7J8tvVxugnHvbeVoGkLoQd8R1Ou+QwwoQrft7mgVkNY/ipZXoIQuEh2Aw6dorDf4bb+ksoh8yvTmnzTaS1DEGo/Y+1Af2gyBtauMg9WzeU8zzbsCYzmOzECRd0Rm4Lp/1MlEQQSyBwP9zv2J070b6EvaipyGIUue/8vCndWNZwBLSLMSaFLcaUYHCZkr37Rm1aKfH7oDBeqj9GyogyVXkjLOjRy62jtrTV4naD5fPI7vnyD6SFjthTR0ickcUbjHX8BRNVLG23KpdUQ9ApN67nR2aBBdMaJZ3ytDi2mjXtFd9UaeTR/Wc1yB1HsJKSgaNCekjzk7J1nTw8vaFhkKyfQC8DoxIdoTW71wqBFU4OJPsplWZAIXiuScGzuPkV10+QUtMwcM0Gau9UHqHnkM2kcPLHW09TGAdps2N3EcElkXp2MwPuhZp607HxZ+2TUg11nSZDyymv37Ixx6kUKwn3hoJaUH6dHNxXveWYGR1piO2pR2rwLA4orbebf0=
