@@ -9,6 +9,7 @@
       <slot name="sidebar-top" slot="top"/>
       <slot name="sidebar-bottom" slot="bottom"/>
     </Sidebar>
+      
     <div class="custom-layout" v-if="$page.frontmatter.layout">
       <component :is="$page.frontmatter.layout"/>
     </div>
@@ -17,34 +18,34 @@
       <slot name="page-top" slot="top"/>
       <slot name="page-bottom" slot="bottom"/>
     </Page>
+    <Icons/>   
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import nprogress from 'nprogress'
-import Home from './Home.vue'
-import Navbar from './Navbar.vue'
-import Page from './Page.vue'
-import Sidebar from './Sidebar.vue'
-import { resolveSidebarItems } from './util'
+import Vue from "vue";
+import nprogress from "nprogress";
+import Home from "./Home.vue";
+import Navbar from "./Navbar.vue";
+import Page from "./Page.vue";
+import Sidebar from "./Sidebar.vue";
+import Icons from "./Icons.vue";
+import { resolveSidebarItems } from "./util";
 
 export default {
-  components: { Home, Page, Sidebar, Navbar },
-  data () {
+  components: { Home, Page, Sidebar, Navbar, Icons },
+  data() {
     return {
       isSidebarOpen: false
-    }
+    };
   },
 
   computed: {
-    shouldShowNavbar () {
-      const { themeConfig } = this.$site
-      const { frontmatter } = this.$page
-      if (
-        frontmatter.navbar === false ||
-        themeConfig.navbar === false) {
-        return false
+    shouldShowNavbar() {
+      const { themeConfig } = this.$site;
+      const { frontmatter } = this.$page;
+      if (frontmatter.navbar === false || themeConfig.navbar === false) {
+        return false;
       }
       return (
         this.$title ||
@@ -52,10 +53,10 @@ export default {
         themeConfig.repo ||
         themeConfig.nav ||
         this.$themeLocaleConfig.nav
-      )
+      );
     },
-    shouldShowSidebar () {
-      const { frontmatter } = this.$page
+    shouldShowSidebar() {
+      const { frontmatter } = this.$page;
       return (
         !frontmatter.layout &&
         !frontmatter.home &&
